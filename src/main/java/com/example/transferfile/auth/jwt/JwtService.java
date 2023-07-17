@@ -1,5 +1,6 @@
 package com.example.transferfile.auth.jwt;
 
+import com.example.transferfile.exception.UserException;
 import com.example.transferfile.model.User;
 import com.example.transferfile.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -52,13 +53,13 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validationToken(String token, UserDetails userDetails) {
+    public Boolean validationToken(String token, UserDetails userDetails) throws UserException {
         final String username = extractUsername(token);
         if (username.equals(userDetails.getUsername()) && !isTokenExpired(token)) {
             return true;
         } else {
             User user = userRepository.findByUsername(username).
-                    orElseThrow(() -> new RuntimeException("User not found"));
+                    orElseThrow(UserException::userNotFound);
             user.setLoggedIn(false);
             userRepository.save(user);
             return false;

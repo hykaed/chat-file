@@ -29,7 +29,7 @@ public interface UserService {
 
     List<UserDto> getAllNonActiveUsers();
 
-    List<UserDto> deactivateUsers(List<Long> list);
+    List<UserDto> deactivateUsers(List<Long> list) throws UserException ;
 
     void logout() throws UserException;
 }

@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserDto> deactivateUsers(List<Long> list) {
+    public List<UserDto> deactivateUsers(List<Long> list) throws UserException{
         if (list == null) {
             return null;
         }
@@ -150,6 +150,9 @@ public class UserServiceImpl implements UserService {
                 entity.setActive(false);
                 userRepository.save(entity);
                 userDtos.add(userMapper.toDto(entity));
+
+            } else {
+                throw UserException.userNotFound();
             }
         });
 

@@ -26,7 +26,7 @@ public class UserController {
         return userService.getAllNonActiveUsers();
     }
 
-    @GetMapping("/activateUserById")
+    @PutMapping ("/activateUserById")
     public void activateUserById(@RequestParam Long id) throws UserException {
         userService.activateUserById(id);
     }
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping("/deactivateUsers")
-    public List<UserDto> deactivateUsers(@RequestBody List<Long> list) {
+    public List<UserDto> deactivateUsers(@RequestBody List<Long> list) throws UserException {
         return userService.deactivateUsers(list);
     }
 }
