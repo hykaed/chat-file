@@ -145,13 +145,17 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtos = new ArrayList<>();
         list.forEach(l -> {
             Optional<User> user = userRepository.findById(l);
-            if (user.isPresent() && user.get().isActive()) {
-                User entity = user.get();
-                entity.setActive(false);
-                userRepository.save(entity);
-                userDtos.add(userMapper.toDto(entity));
+            if (user.isPresent() ) {
+                if (user.get().isActive()) {
+                    User entity = user.get();
+                    entity.setActive(false);
+                    userRepository.save(entity);
+                    userDtos.add(userMapper.toDto(entity));
 
-            } else {
+                } else {
+                    throw UserException.userNotActive();
+                }
+            }else{
                 throw UserException.userNotFound();
             }
         });
