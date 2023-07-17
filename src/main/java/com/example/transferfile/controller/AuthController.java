@@ -3,7 +3,6 @@ package com.example.transferfile.controller;
 import com.example.transferfile.dto.AuthRequest;
 import com.example.transferfile.exception.AuthException;
 import com.example.transferfile.exception.UserException;
-import com.example.transferfile.model.User;
 import com.example.transferfile.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

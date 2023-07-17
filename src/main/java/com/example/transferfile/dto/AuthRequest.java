@@ -10,6 +10,7 @@ public class AuthRequest {
 
     @NotNull(message = "This can't be null")
     private String username;
+
     @NotNull(message = "This can't be null")
     private String password;
 }

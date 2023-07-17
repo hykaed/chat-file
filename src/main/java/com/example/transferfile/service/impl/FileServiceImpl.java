@@ -35,7 +35,7 @@ public class FileServiceImpl implements FileService {
     public void upload(long receiverId, MultipartFile file) throws IOException, AuthException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        User from = userRepository.findByUsername(currentPrincipalName).orElseThrow(()->new AuthException("User not found"));
+        User from = userRepository.findByUsername(currentPrincipalName).orElseThrow(() -> new AuthException("User not found"));
         if (!from.isLoggedIn()) {
             throw new IllegalStateException("Cannot send");
         }

@@ -66,7 +66,6 @@ public class SecurityConfig {
                             "/api/user/deactivateUserById",
                             "/api/user/deactivateUsers"
                     ).hasRole("ADMIN");
-//                    auth.requestMatchers().authenticated();
                 })
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

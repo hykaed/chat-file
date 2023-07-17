@@ -1,14 +1,10 @@
 package com.example.transferfile.controller;
 
 import com.example.transferfile.dto.UserDto;
-import com.example.transferfile.exception.AuthException;
-
 import com.example.transferfile.exception.UserException;
 import com.example.transferfile.service.UserService;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +22,7 @@ public class UserController {
         return userService.getAllNonActiveUsers();
     }
 
-    @PutMapping ("/activateUserById")
+    @PutMapping("/activateUserById")
     public void activateUserById(@RequestParam Long id) throws UserException {
         userService.activateUserById(id);
     }
