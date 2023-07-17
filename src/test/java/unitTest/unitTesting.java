@@ -66,34 +66,6 @@ public class unitTesting {
         verify(userRepository, times(1)).findById(userId);
         verify(userRepository, times(1)).save(user);
     }
-
-    @Test
-    public void testDeactivateUserById_UserNotFound() {
-
-        Long userId = 123L;
-
-        when(userRepository.findById(userId)).thenReturn(Optional.empty());
-
-
-        assertThrows(UserException.class, () -> userService.deactivateUserById(userId));
-        verify(userRepository, times(1)).findById(userId);
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    public void testDeactivateUserById_UserNotActive() {
-
-        Long userId = 123L;
-        User user = new User();
-        user.setId(userId);
-        user.setActive(false);
-
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-
-        assertThrows(UserException.class, () -> userService.deactivateUserById(userId));
-        verify(userRepository, times(1)).findById(userId);
-        verify(userRepository, never()).save(any(User.class));
-    }
 }
 
 

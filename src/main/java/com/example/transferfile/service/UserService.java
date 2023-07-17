@@ -13,13 +13,9 @@ public interface UserService {
 
     User registerUser(AuthRequest request) throws AuthException;
 
-    boolean existsById(Long id);
-
-    User getUserById(Long id) throws UserException;
-
     User getUserByUsername(String username) throws UserException;
 
-    void updateUser(User user) throws UserException;
+    void updateUser(User user) ;
 
     String loginUser(AuthRequest authRequest) throws AuthException, UserException;
 

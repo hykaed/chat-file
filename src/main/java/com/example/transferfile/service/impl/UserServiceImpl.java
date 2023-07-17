@@ -55,27 +55,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return userRepository.existsById(id);
-    }
-
-    @Override
     public User getUserByUsername(String username) throws UserException {
         return userRepository.findByUsername(username)
                 .orElseThrow(UserException::userNotFound);
     }
 
     @Override
-    public User getUserById(Long id) throws UserException {
-        return userRepository.findById(id)
-                .orElseThrow(UserException::userNotFound);
-    }
-
-    @Override
-    public void updateUser(User user) throws UserException {
-        if (!existsById(user.getId())) {
-            throw UserException.userNotFound();
-        }
+    public void updateUser(User user) {
         userRepository.save(user);
     }
 
@@ -88,7 +74,6 @@ public class UserServiceImpl implements UserService {
                 );
 
         Authentication authentication = authManager.authenticate(token);
-
         if (authentication.isAuthenticated()) {
             User user = getUserByUsername(authentication.getName());
             if (!user.isActive()) {
@@ -138,14 +123,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserDto> deactivateUsers(List<Long> list) throws UserException{
+    public List<UserDto> deactivateUsers(List<Long> list) throws UserException {
         if (list == null) {
             return null;
         }
         List<UserDto> userDtos = new ArrayList<>();
         list.forEach(l -> {
             Optional<User> user = userRepository.findById(l);
-            if (user.isPresent() ) {
+            if (user.isPresent()) {
                 if (user.get().isActive()) {
                     User entity = user.get();
                     entity.setActive(false);
@@ -155,7 +140,7 @@ public class UserServiceImpl implements UserService {
                 } else {
                     throw UserException.userNotActive();
                 }
-            }else{
+            } else {
                 throw UserException.userNotFound();
             }
         });
