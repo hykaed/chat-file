@@ -33,7 +33,7 @@ public class unitTesting {
 
     @Test
     public void testRegisterUser_Success() throws AuthException {
-        // Arrange
+        //Arrange
         AuthRequest request = new AuthRequest("testUser", "password");
 
         when(userRepository.findByUsername(request.getUsername())).thenReturn(Optional.empty());
