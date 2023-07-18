@@ -2,10 +2,7 @@ package com.example.transferfile.configuration;
 
 import com.example.transferfile.auth.UserInfoDetailsService;
 import com.example.transferfile.auth.filter.JwtAuthFilter;
-
-import com.example.transferfile.enums.Role;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
